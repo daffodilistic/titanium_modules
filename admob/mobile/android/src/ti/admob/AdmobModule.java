@@ -7,6 +7,8 @@
 
 package ti.admob;
 
+import java.util.Set;
+
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.Log;

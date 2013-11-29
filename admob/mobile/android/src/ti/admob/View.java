@@ -13,7 +13,9 @@ import org.appcelerator.titanium.view.TiUIView;
 
 import android.app.Activity;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.ads.Ad;
 import com.google.ads.AdListener;
@@ -33,7 +35,8 @@ public class View extends TiUIView implements AdListener {
 	String prop_color_text;
 	String prop_color_link;
 	String prop_color_url;
-
+	String[] prop_keywords;
+	
 	public View(final TiViewProxy proxy) {
 		super(proxy);
 		Log.d(LCAT, "Creating an adMob ad view");
@@ -65,6 +68,18 @@ public class View extends TiUIView implements AdListener {
 			Log.d(LCAT, "extras.size() > 0 -- set ad properties");
 			adRequest.setExtras(extras);
 		}
+
+		if (prop_keywords != null) {
+			Set<String> keywordSet = new HashSet<String>();
+			int count = 0;
+		    while (count < prop_keywords.length) {
+		    	Log.d(LCAT, "setting keyword: " + prop_keywords[count]);
+		    	keywordSet.add(prop_keywords[count]);
+		        count++;
+		    }
+		    adRequest.setKeywords(keywordSet);
+		}
+		
 		adView.loadAd(adRequest);
 	}
 
@@ -79,6 +94,10 @@ public class View extends TiUIView implements AdListener {
 		if (d.containsKey("testing")) {
 			Log.d(LCAT, "has testing param: " + d.getBoolean("testing"));
 			AdmobModule.TESTING = d.getBoolean("testing");
+		}
+		if (d.containsKey("keywords")) {
+			Log.d(LCAT, "has keywords: " + d.getStringArray("keywords"));
+			prop_keywords = d.getStringArray("keywords");
 		}
 		if (d.containsKey(AdmobModule.PROPERTY_COLOR_BG)) {
 			Log.d(LCAT, "has PROPERTY_COLOR_BG: " + d.getString(AdmobModule.PROPERTY_COLOR_BG));
@@ -154,6 +173,7 @@ public class View extends TiUIView implements AdListener {
 	// http://code.google.com/mobile/ads/docs/bestpractices.html#adcolors
 	private Map<String, Object> createAdRequestProperties() {
 		Map<String, Object> extras = new HashMap<String, Object>();
+		
 		if (prop_color_bg != null) {
 			Log.d(LCAT, "color_bg: " + prop_color_bg);
 			extras.put("color_bg", prop_color_bg);

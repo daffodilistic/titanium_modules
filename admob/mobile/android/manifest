@@ -2,12 +2,12 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 3.1.2
+version: 3.2.3
 apiversion: 2
 description: Updated Titanium Admob module for Android
 author: Soh Thiam Hing
 license: Apache License, Version 2.0
-copyright: Copyright (c) 2013 by Soh Thiam Hing
+copyright: Copyright (c) 2014 by Soh Thiam Hing
 
 
 # these should not be edited
@@ -15,4 +15,4 @@ name: admob
 moduleid: ti.admob
 guid: 0d005e93-9980-4739-9e41-fd1129c8ff32
 platform: android
-minsdk: 3.1.2.GA
+minsdk: 3.2.3.GA
